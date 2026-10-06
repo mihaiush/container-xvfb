@@ -16,6 +16,4 @@ RUN \
         x11vnc \
         xterm
 
-VOLUME /xvfb
-
 ADD xvfb-cmd /usr/local/bin/

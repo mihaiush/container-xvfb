@@ -16,6 +16,6 @@ export NO_AT_BRIDGE=1
 export SHELL=/bin/bash 
 export XDG_RUNTIME_DIR=xdg
 
-(sleep 2 && x11vnc -display :100 -auth xauth -forever -nopw -quiet -listen 0.0.0.0) &
+(sleep 1 && x11vnc -display :100 -auth xauth -forever -nopw -quiet -listen 0.0.0.0) &
 xvfb-run -n 100 -f xauth -s "-screen 0 1024x768x24" dbus-launch --exit-with-x11 "$@"
 
