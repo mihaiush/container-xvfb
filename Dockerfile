@@ -1,0 +1,19 @@
+# renovate: datasource=docker depName=library/debian
+ARG IMAGE_VERSION=testing-20260824-slim
+FROM docker.io/library/debian:${IMAGE_VERSION}
+
+RUN \
+    echo 'APT::Install-Recommends "false";' >>/etc/apt/apt.conf &&\
+    echo 'APT::Install-Suggests "false";' >>/etc/apt/apt.conf &&\
+    export DEBIAN_FRONTEND=noninteractive &&\
+    apt-get -q -y update &&\
+    apt-get -q -y dist-upgrade --auto-remove &&\
+    apt-get -q -y install \
+        ca-certificates \
+        xvfb \
+        dbus-x11 \
+        xauth \ 
+        x11vnc \
+        xterm
+
+ADD xvfb-cmd /usr/local/bin/
