@@ -38,7 +38,7 @@ jobs:
           images: ghcr.io/${{ github.repository_owner }}/build
           tags: |
             # Fixed prefix combined with extracted Dockerfile base version
-            type=raw,value="${{ steps.dockerfile_version.outputs.version }}-${{ github.run_number }}" #" fix vi highlight
+            type=raw,value="${{ steps.dockerfile_version.outputs.version }}-${{ github.run_number }}"
             
             # Optional: Keep 'latest' tag on the main branch
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
