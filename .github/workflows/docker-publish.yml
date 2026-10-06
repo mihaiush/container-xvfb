@@ -18,7 +18,7 @@ jobs:
       - name: Extract base image version from Dockerfile
         id: dockerfile_version
         run: |
-          TAG=$(awk -F'[:-]' '/XVFB_VERSION=/{print $2"-deb"$3}' Dockerfile | head -1)
+          TAG=$(awk -F'[:"]' '/XVFB_VERSION=/{print $3}' Dockerfile | head -1)
           echo "version=${TAG}" >> $GITHUB_OUTPUT
 
       - name: Set up Docker Buildx
@@ -38,7 +38,7 @@ jobs:
           images: ghcr.io/${{ github.repository_owner }}/build
           tags: |
             # Fixed prefix combined with extracted Dockerfile base version
-            type=raw,value=${{ steps.dockerfile_version.outputs.version }}-${{ github.run_number }}
+            type=raw,value="${{ steps.dockerfile_version.outputs.version }}-${{ github.run_number }}" #" fix vi highlight
             
             # Optional: Keep 'latest' tag on the main branch
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
