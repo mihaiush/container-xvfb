@@ -11,11 +11,9 @@ vnc(){
         sleep 1
     done
     local D
-    local P
     D=$(find /tmp/.X11-unix/ -name 'X*' | awk -F'/X' '{print $2}')
-    P=$(( $VNC_PORT + 1 ))
-    x11vnc -quiet -display :$D -auth xauth -forever -nopw -rfbport $P -noipv6 &
-    websockify --web /usr/share/novnc 127.0.0.1:${VNC_PORT} 127.0.0.1:$P
+    x11vnc -quiet -display :$D -auth xauth -forever -nopw -listen 127.0.0.100 -rfbport $VNC_PORT -noipv6 &
+    websockify --web /usr/share/novnc 127.0.0.1:${VNC_PORT} 127.0.0.100:$VNC_PORT
 }
 
 set -x
