@@ -5,6 +5,19 @@ if [ -z "$1" ] ; then
     exit 2
 fi
 
+vnc(){
+    [ -z "$1" ] && return
+    while ! [ -e "xauth" ] ; do
+        sleep 1
+    done
+    local D
+    local P
+    D=$(find /tmp/.X11-unix/ -name 'X*' | awk -F'/X' '{print $2}')
+    P=$(( $VNC_PORT + 1 ))
+    x11vnc -quiet -display :$D -auth xauth -forever -nopw -rfbport $P -noipv6 &
+    websockify --web /usr/share/novnc 127.0.0.1:${VNC_PORT} 127.0.0.1:$P
+}
+
 set -x
 
 export HOME=/xvfb
@@ -16,6 +29,6 @@ export NO_AT_BRIDGE=1
 export SHELL=/bin/bash 
 export XDG_RUNTIME_DIR=xdg
 
-(sleep 1 && x11vnc -display :100 -auth xauth -forever -nopw -quiet -listen 0.0.0.0) &
-xvfb-run -n 100 -f xauth -s "-screen 0 1024x768x24" dbus-launch --exit-with-x11 "$@"
+vnc $VNC_PORT &
+xvfb-run -f xauth --auto-servernum -s "-screen 0 1024x768x24" dbus-launch --exit-with-x11 "$@"
 

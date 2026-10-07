@@ -17,6 +17,8 @@ RUN \
         dbus-x11 \
         xauth \ 
         x11vnc \
+        novnc \
+        websockify \
         xterm
 
 ADD xvfb-cmd /usr/local/bin/
