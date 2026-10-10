@@ -11,6 +11,7 @@ RUN \
     apt-get -q -y dist-upgrade --auto-remove &&\
     apt-get -q -y install \
         ca-certificates \
+        procps \
         xvfb=${XVFB_VERSION} \
         dbus-x11 \
         xauth \ 

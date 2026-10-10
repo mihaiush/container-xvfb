@@ -2,12 +2,12 @@
 
 set -x
 
+trap 'echo exit ; pkill -9 -f "x11vnc|websockify"' INT 
+
 cd $HOME
 
 D=$(find /tmp/.X11-unix/ -name 'X*' | awk -F'/X' '{print $2}')
 
-x11vnc -quiet -display :$D -auth xauth -forever -nopw -noipv6 -listen 0.0.0.0 -autoport 5900 &
-sleep 1
-P=$(netstat -ntlp | awk -F':' '/0\.0\.0\.0.+x11vnc/{print $2}' | awk '{print $1}')
-websockify --web /usr/share/novnc $(( $P + 1 )) 127.0.0.1:$P
-
+websockify --web /usr/share/novnc 15900 127.0.0.1:5900 &
+x11vnc -quiet -display :$D -auth xauth -forever -nopw -noipv6 -listen 0.0.0.0 
+pkill -f websockify
