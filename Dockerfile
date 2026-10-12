@@ -1,4 +1,6 @@
-FROM docker.io/library/debian:testing-20260824-slim
+# renovate: datasource=docker depName=mihaiush/xvfb
+ARG IMAGE_VERSION="testing-20260824-slim"
+FROM docker.io/library/debian:${IMAGE_VERSION}
 
 # renovate: datasource=deb depName=xvfb registryUrl=https://deb.debian.org/debian?suite=testing&components=main&binaryArch=amd64
 ENV XVFB_VERSION="2:21.1.24-1"
