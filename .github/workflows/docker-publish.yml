@@ -33,23 +33,40 @@ jobs:
       - name: Extract data from Dockerfile
         id: dockervars
         run: |
-          if [ -x "dockervars.sh" ] ; then
-            . <(./dockervars.sh)
+          if [ -f "dockervars.sh" ] ; then
+            . dockervars.sh
           fi
+
+          # name
           if [ -z "$NAME" ] ; then
             NAME=$(echo "${{ github.event.repository.name }}" | awk -F'container-' '{print $2}')
           fi
+          if [ -z "$NAME" ] ; then
+            echo "Empty NAME"
+            exit 1
+          fi
           echo "name=${NAME}" >> "$GITHUB_OUTPUT"
+
+          # tag
           if [ -z "$TAG" ] ; then
             TAG=$(echo $NAME | tr '[a-z]' '[A-Z]')
             TAG=$(awk -F'"' '/'${TAG}'_VERSION=/{print $2}' Dockerfile)
           fi
-          if [[ "$TAG" =~ ^[0-9]+\.[0-9]$ ]]; then
+          if [ -z "$TAG" ] ; then
+            echo "Empty TAG"
+            exit 1
+          fi
+          if [[ "$TAG" =~ ^[0-9]+\.[0-9]+$ ]]; then
+            # semver
             TAG="${TAG}.${{ github.run_number }}"
           else
+            # non-semver
             TAG="${TAG}-${{ github.run_number }}"
           fi
           echo "tag=${TAG}" >> $GITHUB_OUTPUT
+
+          # debug
+          cat $GITHUB_OUTPUT
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
