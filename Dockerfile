@@ -27,5 +27,7 @@ ENV NO_AT_BRIDGE=1
 ENV SHELL=/bin/bash
 ENV XDG_RUNTIME_DIR=xdg
 
-ADD xvfb-cmd /usr/local/bin/
-ADD xvfb-vnc /usr/local/bin/
+COPY xvfb-cmd /usr/local/bin/
+COPY xvfb-vnc /usr/local/bin/
+
+WORKDIR /xvfb
