@@ -11,5 +11,5 @@ mkdir -p $HOME/xdg
 chmod -R 0700 $HOME/xdg
 cd $HOME
 
-xvfb-run -f xauth --auto-servernum -s "-screen 0 1024x768x24" dbus-launch --exit-with-x11 "$@"
+xvfb-run -f xauth --auto-servernum -s "-screen 0 1024x768x24" dbus-launch "$@"
 
