@@ -29,5 +29,3 @@ ENV XDG_RUNTIME_DIR=xdg
 
 COPY xvfb-cmd /usr/local/bin/
 COPY xvfb-vnc /usr/local/bin/
-
-WORKDIR /xvfb
