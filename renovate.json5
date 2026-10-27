@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "github>mihaiush/ci//renovate-regex.json5#main"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["docker.io/library/debian"],
+      "versioning": "regex:^testing-(?<major>\\d+)-slim$"
+    }
+  ]
+}
