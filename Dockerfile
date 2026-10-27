@@ -1,4 +1,4 @@
-# renovate: datasource=docker depName=mihaiush/xvfb
+# renovate: datasource=docker depName=library/debian
 ARG IMAGE_VERSION="testing-20260824-slim"
 FROM docker.io/library/debian:${IMAGE_VERSION}
 
