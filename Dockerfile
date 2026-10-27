@@ -1,5 +1,5 @@
 # renovate: datasource=docker depName=library/debian
-ARG IMAGE_VERSION="testing-20260824-slim"
+ARG IMAGE_VERSION="testing-20261020-slim"
 FROM docker.io/library/debian:${IMAGE_VERSION}
 
 # renovate: datasource=deb depName=xvfb registryUrl=https://deb.debian.org/debian?suite=testing&components=main&binaryArch=amd64
