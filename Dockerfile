@@ -12,7 +12,6 @@ RUN \
     apt-get -q -y install \
         ca-certificates \
         procps \
-        xvfb=${XVFB_VERSION} \
         dbus-x11 \
         xauth \ 
         x11vnc \
