@@ -1,8 +1,5 @@
 FROM docker.io/library/debian:testing-20261027-slim
 
-# _renovate: datasource=deb packageName=xvfb registryUrl=https://deb.debian.org/debian?suite=testing&components=main&binaryArch=amd64
-#ENV XVFB_VERSION="2:21.1.25-2"
-
 RUN \
     echo 'APT::Install-Recommends "false";' >>/etc/apt/apt.conf &&\
     echo 'APT::Install-Suggests "false";' >>/etc/apt/apt.conf &&\
@@ -19,7 +16,9 @@ RUN \
         websockify \
         xterm
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -q -y install xvfb=2:21.1.25-2
+# renovate-regex: datasource=deb packageName=xvfb registryUrl=https://deb.debian.org/debian?suite=testing&components=main&binaryArch=amd64
+ENV XVFB_VERSION="2:21.1.25-2"
+RUN DEBIAN_FRONTEND=noninteractive apt-get -q -y install xvfb=${XVFB_VERSION}
 
 ENV HOME=/xvfb
 ENV NO_AT_BRIDGE=1
