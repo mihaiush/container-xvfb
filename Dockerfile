@@ -1,4 +1,4 @@
-FROM docker.io/library/debian:testing-20261027-slim
+FROM docker.io/library/debian:testing-20261104-slim
 
 RUN \
     echo 'APT::Install-Recommends "false";' >>/etc/apt/apt.conf &&\
