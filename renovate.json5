@@ -1,6 +1,6 @@
 {
   "extends": [
-    "github>mihaiush/ci/renovate-lib.json5#main"
+    "github>mihaiush/ci//renovate-lib.json5#main"
   ],
   "packageRules": [
     {
