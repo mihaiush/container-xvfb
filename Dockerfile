@@ -17,7 +17,7 @@ RUN \
         xterm
 
 # renovate-vre: datasource=deb packageName=xvfb registryUrl=https://deb.debian.org/debian?suite=testing&components=main&binaryArch=amd64
-ENV XVFB_VERSION="2:21.1.25-2"
+ENV XVFB_VERSION="2:21.1.26-1"
 RUN DEBIAN_FRONTEND=noninteractive apt-get -q -y install xvfb=${XVFB_VERSION}
 
 ENV HOME=/xvfb
